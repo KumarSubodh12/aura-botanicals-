@@ -1,4 +1,6 @@
-# 🌿 AURA Botanicals — Full Stack Website
+# 🌿 AURA Botanicals — Full Stack Website 
+
+LIVE _ https://aura-botanicals.vercel.app/
 
 Premium botanical beverage brand — complete fullstack project.
 **No C++ compilation needed. Works on Windows/Mac/Linux.**
