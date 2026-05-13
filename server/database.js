@@ -1,0 +1,81 @@
+// ═══════════════════════════════════════════════
+// AURA Botanicals — JSON Database (lowdb v1)
+// Pure JS — no C++ compilation needed
+// ═══════════════════════════════════════════════
+const low  = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const path = require('path');
+const fs   = require('fs');
+
+// ensure db/ directory exists
+const dbDir = path.join(__dirname, '../db');
+if (!fs.existsSync(dbDir)) fs.mkdirSync(dbDir, { recursive: true });
+
+const adapter = new FileSync(path.join(dbDir, 'aura.json'));
+const db = low(adapter);
+
+// ─── DEFAULT DATA ─────────────────────────────
+db.defaults({
+  products: [
+    {
+      id: 1, name: 'AURA Citrus Bloom',
+      notes: 'Yuzu · Bergamot · Honey',
+      tagline: '"The morning awakening."',
+      price: 4.50, badge: 'LIMITED', badge_color: '#C9402A',
+      color_top: '#f7a35c', color_mid: '#c9402a', color_bot: '#8b2215',
+      neck_color: '#e09050', cap_color: '#1C3A2A', blob_color: '#f7a35c'
+    },
+    {
+      id: 2, name: 'AURA Meadow Drift',
+      notes: 'Elderflower · Mint · Pear',
+      tagline: '"A garden in every sip."',
+      price: 4.50, badge: 'LIMITED', badge_color: '#2a6b3a',
+      color_top: '#8fd08f', color_mid: '#3a9e3a', color_bot: '#1e5e1e',
+      neck_color: '#6db86d', cap_color: '#f5f0e8', blob_color: '#3a9e3a'
+    },
+    {
+      id: 3, name: 'AURA Ember Hush',
+      notes: 'Hibiscus · Rosehip · Black Pepper',
+      tagline: '"Bold botanicals, slow burn."',
+      price: 4.50, badge: 'LIMITED', badge_color: '#8B2215',
+      color_top: '#e09080', color_mid: '#b84030', color_bot: '#7a1a10',
+      neck_color: '#d97060', cap_color: '#1C3A2A', blob_color: '#b84030'
+    },
+    {
+      id: 4, name: 'AURA Dusk Veil',
+      notes: 'Lavender · Blueberry · Vanilla',
+      tagline: '"Unwind, beautifully."',
+      price: 4.50, badge: 'LIMITED', badge_color: '#5a3a8a',
+      color_top: '#b0a0e8', color_mid: '#7a5aaa', color_bot: '#4a2a7a',
+      neck_color: '#a090d8', cap_color: '#D4E04A', blob_color: '#7a5aaa'
+    }
+  ],
+
+  cart: [],
+
+  newsletter: [],
+
+  contact: [],
+
+  testimonials: [
+    { id: 1, quote: 'I drank one at sunrise and reorganised my entire life by noon.', name: 'Maga R.', title: 'Florist, Brooklyn' },
+    { id: 2, quote: 'Nothing has ever made me feel more like a main character than this bottle.', name: 'Theo K.', title: 'Architect, Tokyo' },
+    { id: 3, quote: "I stopped drinking wine. My sommelier cried. I didn't.", name: 'Elena V.', title: 'Winemaker, Lisbon' },
+    { id: 4, quote: 'Tastes like the greenhouse where good decisions grow.', name: 'Sam B.', title: 'Botanist, Devon' }
+  ],
+
+  ingredients: [
+    { id: 1, num: '01', name: 'Yuzu',        description: 'Bright citrus, zero bitterness',  origin: 'Kōchi, JP',    blob_color: '#D4E04A' },
+    { id: 2, num: '02', name: 'Elderflower', description: 'Honeyed, floral nose',             origin: 'Devon, UK',    blob_color: 'rgba(28,58,42,0.2)' },
+    { id: 3, num: '03', name: 'Hibiscus',    description: 'Tart, deep crimson',               origin: 'Aswan, EG',    blob_color: '#C9402A' },
+    { id: 4, num: '04', name: 'Lavender',    description: 'Soft, calming finish',             origin: 'Provence, FR', blob_color: '#a090d8' },
+    { id: 5, num: '05', name: 'Bergamot',    description: 'Cold-pressed peel',                origin: 'Calabria, IT', blob_color: '#f5a558' },
+    { id: 6, num: '06', name: 'Black Pepper',description: 'Gentle warmth on the tail',        origin: 'Kerala, IN',   blob_color: '#1C3A2A' },
+    { id: 7, num: '07', name: 'Rosehip',     description: 'Tangy, vitamin-rich',              origin: 'Andes, CL',    blob_color: '#e07a70' },
+    { id: 8, num: '08', name: 'Honey',       description: 'Raw, unfiltered warmth',           origin: 'Oaxaca, MX',   blob_color: '#e8b84a' }
+  ],
+
+  _nextId: { cart: 1, newsletter: 1, contact: 1 }
+}).write();
+
+module.exports = db;
